@@ -74,8 +74,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # MariaDB도 mysql로 설정
+        'NAME': 'mydb3',                # DB 이름
+        'USER': 'root',                # 사용자명
+        'PASSWORD': 'amjunha!06',        # 비밀번호
+        'HOST': 'localhost',                   # 또는 IP
+        'PORT': '3306',                        # MariaDB 기본 포트
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
