@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # Django 관리자 페이지 URL (기본 제공)
     path('admin/', admin.site.urls),
+
+    # accounts 앱의 URL들을 포함시킴
+    # 클라이언트에서 '/api/accounts/'로 시작하는 요청은 accounts/urls.py로 전달
     path('api/accounts/', include('accounts.urls')),
 ]

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qknqgf=b@c@=u46lor(u+ob)zird=z3ali@obeso)r*0r_lj8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.55.105', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.55.105', 'localhost', '127.0.0.1'] # ip주소 변경필요
 
 # Application definition
 
@@ -37,20 +37,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'accounts', # 회원가입/로그인
-    'rest_framework', # djangoframework 설치
-    'rest_framework.authtoken', # 어스토큰
-    "corsheaders",
+     # 사용자 계정 관련 앱
+    'accounts',
+    # Django REST Framework
+    'rest_framework',
+    # 토큰 기반 인증
+    'rest_framework.authtoken',
+    # CORS 설정
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
+    # 기본 인증 방식 설정: 토큰 인증 사용
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+    # 기본 권한 설정: 모든 요청 허용
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny', 
+    ],
 }
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # 맨 위에 추가 권장
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,7 +71,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True # CORS 허용설정
 
 ROOT_URLCONF = 'config.urls'
 
@@ -87,12 +98,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # MariaDB도 mysql로 설정
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mydb3',                # DB 이름
-        'USER': 'root',                # 사용자명
-        'PASSWORD': 'amjunha!06',        # 비밀번호
-        'HOST': 'localhost',                   # 또는 IP
-        'PORT': '3306',                        # MariaDB 기본 포트
+        'USER': 'root',                 # 사용자명
+        'PASSWORD': 'amjunha!06',       # 비밀번호
+        'HOST': 'localhost',            # 또는 IP
+        'PORT': '3306',                 # MariaDB 기본 포트
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
