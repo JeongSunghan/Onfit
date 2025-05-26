@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-qknqgf=b@c@=u46lor(u+ob)zird=z3ali@obeso)r*0r_lj8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['192.168.55.105', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'accounts', # 회원가입/로그인
     'rest_framework', # djangoframework 설치
     'rest_framework.authtoken', # 어스토큰
+    "corsheaders",
 ]
 
 REST_FRAMEWORK = {
@@ -50,6 +50,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",  # 맨 위에 추가 권장
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'config.urls'
 
