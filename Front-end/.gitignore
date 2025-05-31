@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules/
+env3.11/
 
 # Expo
 .expo/
