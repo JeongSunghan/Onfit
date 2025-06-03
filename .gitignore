@@ -1,2 +1,7 @@
 env3.11/
 node_modules/
+
+# local env files
+.env*.local
+.env*
+Back-end/config/settings.py
