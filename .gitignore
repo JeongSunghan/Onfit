@@ -5,3 +5,4 @@ node_modules/
 .env*.local
 .env*
 Back-end/config/settings.py
+/Back-end/accounts/__pycache__
