@@ -29,7 +29,7 @@ export default function LoginScreen() {
       
       {/* 아이디/비번 파트 */}
       <TextInput
-        placeholder="이메일 아이디"
+        placeholder="이메일 혹은 아이디"
         onChangeText={setUsername}
         value={username}
         style={styles.input}

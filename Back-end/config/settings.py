@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qknqgf=b@c@=u46lor(u+ob)zird=z3ali@obeso)r*0r_lj8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.55.105', 'localhost', '127.0.0.1'] # ip주소 변경필요
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '192.168.0.2'] # ip주소 변경필요
 
 # Application definition
 
@@ -99,9 +99,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb3',                # DB 이름
+        'NAME': 'onfit-1',                # DB 이름
         'USER': 'root',                 # 사용자명
-        'PASSWORD': 'amjunha!06',       # 비밀번호
+        'PASSWORD': '1234',       # 비밀번호
         'HOST': 'localhost',            # 또는 IP
         'PORT': '3306',                 # MariaDB 기본 포트
         'OPTIONS': {
