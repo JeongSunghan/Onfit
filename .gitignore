@@ -4,5 +4,5 @@ node_modules/
 # local env files
 .env*.local
 .env*
-Back-end/config/settings.py
-/Back-end/accounts/__pycache__
+__pycache__
+
