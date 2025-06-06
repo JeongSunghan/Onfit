@@ -11,7 +11,7 @@ export default function Index() {
 
     // 컴포넌트 언마운트 시 타임아웃 정리 (메모리 누수 방지)
     return () => clearTimeout(timeout);
-  }, []);
+  }, [router]);
 
   // 아무 UI도 렌더링하지 않음 (빈 화면)
   return null;

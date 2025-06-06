@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { signup } from './services/auth';
+import { signup } from '../src/services/auth';
+import { showAlert } from '@/src/utils/alert';
 
 export default function SignupScreen() {
   const router = useRouter();
@@ -23,13 +24,13 @@ export default function SignupScreen() {
 
     try {
       // 회원가입 API 호출 후 토큰 받기
-      const token = await signup(username, password);      
-      Alert.alert('회원가입 성공', '로그인 화면으로 이동합니다.');      
+      const token = await signup(username, password, passwordError);      
+      showAlert('회원가입 성공', '로그인 화면으로 이동합니다.');      
       router.replace('/login');
 
-    } catch (error: any) {      
-      const message = error.response?.data?.error || '알 수 없는 오류가 발생했습니다.';
-      Alert.alert('회원가입 실패', message);
+    } catch (e : any) {      
+      const msg = e.response?.data?.error || '알 수 없는 오류가 발생했습니다.';
+      showAlert('회원가입에 실패했습니다.', msg);
     }
   };
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { login } from './services/auth';
+import { login } from '../src/services/auth';
+import { showAlert } from '@/src/utils/alert';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -12,10 +13,11 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     try {
       const token = await login(username, password);
-      Alert.alert('로그인 성공', `토큰: ${token}`);
+      showAlert('로그인 성공', '메인으로 이동합니다.');
       router.replace('/main');
-    } catch (error: any) {
-      Alert.alert('로그인 실패', '아이디 또는 비밀번호가 틀렸습니다.');
+    } catch (e : any) {
+      const msg = e.response?.data?.error ?? '알 수 없는 오류가 발생했습니다.';
+      showAlert('로그인 실패', msg);
     }
   };
 
