@@ -21,6 +21,6 @@ api.interceptors.request.use(async (config) => {
     Platform.OS === "web"
       ? localStorage.getItem("token")
       : await SecureStore.getItemAsync("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  if (token) config.headers.authorization = `Bearer ${token}`;
   return config;
 });
