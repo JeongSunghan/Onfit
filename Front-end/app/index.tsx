@@ -6,7 +6,7 @@ export default function Index() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      router.replace("/login");
+      router.replace("/authorization/login");
     }, 100); // 0.1초 딜레이를 주어 초기 렌더링 안정화
 
     // 컴포넌트 언마운트 시 타임아웃 정리 (메모리 누수 방지)

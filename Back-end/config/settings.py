@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'onfit-1',                # DB 이름
+        'NAME': 'mydb3',                # DB 이름
         'USER': 'root',                 # 사용자명
         'PASSWORD': '1234',       # 비밀번호
         'HOST': 'localhost',            # 또는 IP
