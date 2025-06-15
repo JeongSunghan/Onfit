@@ -4,5 +4,9 @@ node_modules/
 # local env files
 .env*.local
 .env*
-__pycache__
 
+# 파이썬 캐시 디렉터리
+__pycache__/
+
+# 컴파일된 파이썬 파일
+*.pyc

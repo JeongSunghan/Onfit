@@ -38,7 +38,8 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# Python
+# 파이썬 캐시 디렉터리
 __pycache__/
 
-app-example
+# 컴파일된 파이썬 파일
+*.pyc
