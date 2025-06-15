@@ -10,3 +10,4 @@ __pycache__/
 
 # 컴파일된 파이썬 파일
 *.pyc
+/Back-end/accounts/migrations/__pycache__
