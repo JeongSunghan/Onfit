@@ -22,16 +22,16 @@ export async function login(username: string, password: string) {
     throw new Error(
       err.response?.data?.error ?? '로그인 요청 실패(네트워크)'
     );
-
   }  
 }
 
-export async function signup(username: string, password: string, passwordError: string, ) {
+// signup 함수에서 passwordError 제거, location 문자열 인자 추가
+export async function signup(username: string, password: string, location: string) {
   try {
     const { data } = await api.post<AuthResponse>('/signup/', {
       username,
       password,
-      passwordError,      
+      location,
     });
     await saveToken(data.token);
     return data.token;
@@ -39,6 +39,5 @@ export async function signup(username: string, password: string, passwordError: 
     throw new Error(
       err.response?.data?.error ?? '회원가입 요청 실패(네트워크)'
     );
-
   }
 }

@@ -7,7 +7,7 @@ if (!API_URL) throw new Error("EXPO_PUBLIC_API_URL is undefined");
 
 export const api = axios.create({
   baseURL: API_URL,
-  timeout: 1000,
+  // timeout: 1000,
 });
 
 

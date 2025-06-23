@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as Location from "expo-location";
 import {
   Alert,
   StyleSheet,
@@ -10,19 +11,51 @@ import {
 import { useRouter } from "expo-router";
 import { signup } from "../../src/services/auth";
 import { showAlert } from "@/src/utils/alert";
+import { getCityFromCoords } from "@/src/utils/location";
 
 export default function SignupScreen() {
   const router = useRouter();
 
-  // 가입 상태 변수
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // 회원가입 버튼 클릭 시 실행되는 함수
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [city, setCity] = useState("");
+
+  // 위치 권한 요청 및 현재 위치 받아오기
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      console.log("위치 권한 상태:", status);
+
+      if (status !== "granted") {
+        Alert.alert("위치 권한 거부", "위치 권한이 거부되어 위치 정보를 사용할 수 없습니다.");
+        return;
+      }
+
+      const currentLocation = await Location.getCurrentPositionAsync({});
+      console.log("현재 위치 좌표:", currentLocation.coords);
+
+      setLocation({
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+      });
+    })();
+  }, []);
+
+  // 위치가 바뀌면 도시명 받아오기
+  useEffect(() => {
+    if (location) {
+      (async () => {
+        const cityName = await getCityFromCoords(location);
+        setCity(cityName);
+      })();
+    }
+  }, [location]);
+
   const handleSignup = async () => {
-    // 비밀번호 확인 검증
     if (password !== confirmPassword) {
       setPasswordError("비밀번호가 일치하지 않습니다.");
       return;
@@ -30,8 +63,10 @@ export default function SignupScreen() {
     setPasswordError("");
 
     try {
-      // 회원가입 API 호출 후 토큰 받기
-      const token = await signup(username, password, passwordError);
+      const locationStr = location ? `${location.latitude},${location.longitude}` : "";
+
+      const token = await signup(username, password, locationStr);
+
       showAlert("회원가입 성공", "로그인 화면으로 이동합니다.");
       router.replace("/authorization/login");
     } catch (e: any) {
@@ -86,11 +121,16 @@ export default function SignupScreen() {
         <Text style={styles.errorText}>{passwordError}</Text>
       ) : null}
 
+      <TextInput
+        placeholder="현재 위치 (도시명)"
+        value={city}
+        editable={false}
+        style={styles.input}
+        placeholderTextColor="#b0b0b0"
+      />
+
       <TouchableOpacity
-        style={[
-          styles.signupBtn,
-          passwordError ? styles.signupBtnDisabled : null,
-        ]}
+        style={[styles.signupBtn, passwordError ? styles.signupBtnDisabled : null]}
         onPress={handleSignup}
         disabled={!!passwordError}
       >
@@ -107,7 +147,6 @@ export default function SignupScreen() {
   );
 }
 
-// 스타일시트 - 추후 따로 관리 예정
 const styles = StyleSheet.create({
   container: {
     flex: 1,

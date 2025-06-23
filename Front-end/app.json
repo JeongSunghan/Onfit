@@ -39,10 +39,8 @@
     "experiments": {
       "typedRoutes": true
     },
-    "expo": {
-      "extra": {
-        "apiUrl": "${EXPO_PUBLIC_API_URL}"
-      }
+    "extra": {
+      "apiUrl": "${EXPO_PUBLIC_API_URL}"
     }
   }
 }

@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-qknqgf=b@c@=u46lor(u+ob)zird=z3ali@obeso)r*0r_lj8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '192.168.0.2'] # ip주소 변경필요
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '192.168.55.1'] # ip주소 변경필요
 
 # Application definition
 
@@ -29,13 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
      # 사용자 계정 관련 앱
-    'accounts',
+    'accounts.apps.AccountsConfig',
     # Django REST Framework
     'rest_framework',
     # 토큰 기반 인증
     'rest_framework.authtoken',
     # CORS 설정
     'corsheaders',
+
 ]
 
 REST_FRAMEWORK = {
