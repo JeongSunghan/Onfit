@@ -7,12 +7,13 @@ import {
   Text,
   Animated,
   PanResponder,
+  useWindowDimensions,
 } from "react-native";
 import { mainFitData } from "../mockup/mockMainFit";
 
 const { width } = Dimensions.get("window");
 
-export default function CarouselSwiper() {
+export default function CarouselSwiper() {  
   const scrollX = useRef(new Animated.Value(0)).current;
   const positionIndex = useRef(0);
 
@@ -43,6 +44,7 @@ export default function CarouselSwiper() {
     })
   ).current;
 
+  // UI
   return (
     <View style={styles.wrapper} {...panResponder.panHandlers}>
       {mainFitData.map((item, index) => {
@@ -92,22 +94,26 @@ export default function CarouselSwiper() {
 const styles = StyleSheet.create({
   wrapper: {
     width,
-    height: 560,
+    height: 600,
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
+    marginVertical: 12,
   },
   imageContainer: {
-    width: width * 0.65,
-    height: 500,
+    width: width * 0.74,
+    height: 520,
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 6 },
   },
   image: {
     width: "100%",
-    height: 460,
-    borderRadius: 16,
+    height: "100%",
+    borderRadius: 24,
     resizeMode: "cover",
   },
   label: {

@@ -24,22 +24,16 @@ export default function Main() {
         <WeatherHeader data={mockWeather} userName="성한" />
 
         {/* 날씨에 따라 바뀌는 기본 텍스트 영역 */}
-        {isClear ? (
-          <View style={{ padding: 16 }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>
-              맑은 날에는 이렇게?
-            </Text>
-            <Text>캐주얼 룩 설명 등</Text>
-          </View>
-        ) : (
-          <View style={{ padding: 16 }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>
-              흐린 날엔.. 멋은 은은하게
-            </Text>
-            <Text>데일리 1, 데일리 2 코디</Text>
-          </View>
-        )}
-
+        <View style={{ paddingHorizontal: 24, paddingVertical: 16 }}>
+          <Text style={{ fontSize: 20, fontWeight: "700", marginBottom: 6 }}>
+            {isClear ? "맑은 날엔 이렇게!" : "흐린 날엔‥ 멋은 은은하게"}
+          </Text>
+          <Text style={{ fontSize: 14, color: "#444" }}>
+            {isClear
+              ? "페일 데님 + 화이트 스니커즈"
+              : "톤온톤 트렌치 + 미니멀 니트"}
+          </Text>
+        </View>
         <CarouselSwiper />
       </ScrollView>
     </View>
