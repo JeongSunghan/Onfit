@@ -8,6 +8,12 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
+raw_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+# hosts = env로 받아오기, 문제 발생시 아래 주석처리한 부분 오픈 이후, 주석처리 할 것!!
+ALLOWED_HOSTS=[h.strip() for h in raw_hosts.split(",") if h.strip()]
+
+if not ALLOWED_HOSTS and os.getenv("DJANGO_ENV") == "production":
+    raise RuntimeError("ALLOWED_HOSTS 가 비어있습니다. .env 파일 검토 바람")
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -16,7 +22,7 @@ SECRET_KEY = 'django-insecure-qknqgf=b@c@=u46lor(u+ob)zird=z3ali@obeso)r*0r_lj8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '192.168.55.1'] # ip주소 변경필요
+# ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '192.168.55.1'] # ip주소 변경필요
 
 # Application definition
 
